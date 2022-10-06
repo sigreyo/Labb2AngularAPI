@@ -1,0 +1,36 @@
+<div class="app-title">
+    <h2>PERSONNEL DATABASE</h2>
+</div>
+<div class="box-container">
+    <div class="open-panel left-arrows">
+        <span class="symbol"><i class="fa-solid fa-angles-left"></i></span>
+    </div>
+    <div class="list-box">
+        <div class="box-header">
+            <input class="form-control" type="text" list="datalistOptions" id="exampleDataList" placeholder="SEARCH"
+                autocomplete="off" [(ngModel)]="searchText">
+        </div>
+        <div class="box-body">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let person of persons | search: searchText ">
+                        <td>{{person.firstName}}</td>
+                        <td>{{person.lastName}}</td>
+                        <td>{{person.salary}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="open-panel right-arrows">
+        <span class="symbol"><i class="fa-solid fa-angles-right"></i></span>
+    </div>
+
+</div>

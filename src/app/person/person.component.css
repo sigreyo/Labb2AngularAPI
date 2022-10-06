@@ -1,0 +1,59 @@
+.app-title {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+.box-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-control {
+  width: 30%;
+  border: 1px solid springgreen;
+  border-radius: 8px;
+  background-color: #333333;
+  transition: width 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  margin: 0 auto;
+  color: springgreen;
+  text-align: center;
+}
+.form-control:focus {
+  width: 50%;
+  text-align: center;
+  background-color: #6f6f6f;
+}
+.form-control::placeholder {
+  color: rgb(0, 91, 45);
+  text-align: center;
+}
+.open-panel {
+  display: flex;
+  color: aliceblue;
+  font-size: 3em;
+  align-content: center;
+  transition: 0.2s;
+  padding: 5px 5px;
+}
+.open-panel:hover {
+  background-color: #545353;
+}
+.left-arrows {
+  border: 3px solid springgreen;
+  border-right: 0px;
+}
+.right-arrows {
+  border: 3px solid springgreen;
+  border-left: 0px;
+}
+.list-box {
+  border: 3px solid springgreen;
+  width: 50%;
+  min-height: 30rem;
+  max-height: 30rem;
+  border-radius: 8px;
+}
+.box-header {
+  border-bottom: 1px solid springgreen;
+}
+.box-body {
+}

@@ -13,6 +13,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StaffDbContext>(o => o.UseSqlServer(builder.Configuration
     .GetConnectionString("default")));
 
+builder.Services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

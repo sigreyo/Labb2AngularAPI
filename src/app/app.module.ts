@@ -16,7 +16,7 @@ import { ToastsComponent } from './toasts/toasts.component';
     AppComponent,
     PersonComponent,
     SearchPipe,
-    ToastsComponent,    
+    ToastsComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +26,7 @@ import { ToastsComponent } from './toasts/toasts.component';
     FormsModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [ToastsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

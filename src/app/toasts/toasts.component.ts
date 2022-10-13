@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ToastService } from '../toastservice.service';
 
 @Component({
   selector: 'app-toasts',
-  templateUrl: './toasts.component.html',
+  template: `<ngb-toast *ngFor="let toast of toastService.toasts" [autohide]="true"
+  [delay] = "toast.delay || 5000"(hidden) = "toastService.remove(toast)" > {{ toast.body }}</ngb-toast>`,
   styleUrls: ['./toasts.component.css']
 })
-export class ToastsComponent implements OnInit {
+export class ToastsComponent {
 
-  constructor() { }
+  constructor(public toastService: ToastService) { }
 
-  ngOnInit(): void {
+  showDeleteSuccess() {
+    this.toastService.show("Deletion succeeded!");
+  }
+
+  showAddSuccess() {
+    this.toastService.show("Person added!");
   }
 
 }

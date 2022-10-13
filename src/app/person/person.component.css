@@ -86,6 +86,18 @@
 th {
   color: #22b455;
 }
+.list-box .delete {
+  text-align: center;
+}
+.list-box .delete i {
+  color: rgb(138, 0, 0);
+  transition: color 0.2s ease-in-out;
+}
+.list-box .delete i:hover {
+  text-align: center;
+  color: rgb(221, 0, 0);
+  scale: 1.2;
+}
 .pagination {
   margin: 0 auto;
   text-align: center;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 export interface ToastInfo {
-  header: string;
   body: string;
   delay?: number;
 }
@@ -9,12 +8,12 @@ export interface ToastInfo {
 @Injectable({
   providedIn: 'root'
 })
-export class ToastserviceService {
+export class ToastService {
 
   toasts: ToastInfo[] = [];
 
-  show(header: string, body: string) {
-    this.toasts.push({ header, body });
+  show(body: string) {
+    this.toasts.push({ body });
   }
 
   remove(toast: ToastInfo) {

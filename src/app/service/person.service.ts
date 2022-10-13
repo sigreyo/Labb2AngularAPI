@@ -11,13 +11,15 @@ import { HttpClient } from "@angular/common/http";
 
 export class PersonService{
     apiUrl="https://localhost:7287/api/person"
-    constructor(private httpClient:HttpClient){}
+    constructor(private http:HttpClient){}
 
 
     getAllPersons():Observable<Person[]>{      
-    return this.httpClient.get<Person[]>(this.apiUrl)
+    return this.http.get<Person[]>(this.apiUrl)
   }
 
-
+  addPerson(person:Person):Observable<Person>{
+    return this.http.post<Person>(this.apiUrl, person)
+  }
 
 }

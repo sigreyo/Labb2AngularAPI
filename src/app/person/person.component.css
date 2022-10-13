@@ -1,34 +1,64 @@
+.app-title-flash {
+  text-align: center;
+  margin-bottom: 6rem;
+  color: #22b455;
+
+  /* animate */
+
+  text-align: center;
+  font-size: 6.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+  animation: blur 0.05s ease-out infinite;
+  text-shadow: 0px 0px 5px #22b455, 0px 0px 7px #22b455;
+}
+
+@keyframes blur {
+  from {
+    text-shadow: 0px 0px 10px #22b455, 0px 0px 10px #22b455,
+      0px 0px 25px #22b455, 0px 0px 25px #22b455, 0px 0px 25px #22b455,
+      0px 0px 25px #22b455, 0px 0px 25px #29dc68, 0px 0px 25px #22b455,
+      0px 0px 50px #22b455, 0px 0px 50px #075422, 0px 0px 50px #22b455,
+      0px 0px 150px #0c4d22, 0px 10px 100px #22b455, 0px 10px 100px #174b29,
+      0px 10px 100px #22b455, 0px 10px 100px #22b455, 0px -10px 100px #22b455,
+      0px -10px 100px #22b455;
+  }
+}
 .app-title {
   text-align: center;
   margin-bottom: 6rem;
+  color: #22b455;
 }
 .box-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.form-control {
+.search-control {
   width: 30%;
   border: 1px solid springgreen;
   border-radius: 8px;
   background-color: #333333;
   transition: width 0.2s ease-in-out, background-color 0.2s ease-in-out;
   margin: 0 auto;
-  color: springgreen;
+  color: #22b455;
   text-align: center;
 }
-.form-control:focus {
+.search-control:focus {
   width: 50%;
   text-align: center;
   background-color: #6f6f6f;
 }
-.form-control::placeholder {
-  color: rgb(0, 91, 45);
+.search-control:hover {
+  background-color: #6f6f6f;
+}
+.search-control::placeholder {
+  color: rgb(0, 180, 90);
   text-align: center;
 }
 .open-panel {
   display: flex;
-  color: aliceblue;
+  color: rgba(240, 248, 255, 0.542);
   font-size: 3em;
   align-content: center;
   transition: 0.2s;
@@ -52,8 +82,67 @@
   max-height: 30rem;
   border-radius: 8px;
 }
+.list-box td,
+th {
+  color: #22b455;
+}
+.pagination {
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+}
+
 .box-header {
   border-bottom: 1px solid springgreen;
+  text-align: center;
+  padding: 5px;
 }
-.box-body {
+
+.pagination ::ng-deep .ngx-pagination .current {
+  background: rgb(89, 89, 89);
+}
+.pagination ::ng-deep .ngx-pagination span {
+  color: #22b455;
+}
+
+.left-panel {
+  max-width: 30%;
+  padding: 10px;
+  text-align: center;
+  border: 3px solid springgreen;
+  border-right: 0px;
+}
+.left-panel button {
+  color: #22b455;
+  padding: 3px 30px;
+  margin: 5px;
+  border-radius: 8px;
+  border: 1px solid springgreen;
+  background-color: #333333;
+  transition: background-color 0.2s ease-in-out;
+}
+.left-panel button:hover {
+  background-color: #6f6f6f;
+}
+.form-control {
+  background-color: #333333;
+  border: 1px solid springgreen;
+  color: #22b455;
+  transition: background-color 0.2s ease-in-out;
+}
+.form-control:focus {
+  background-color: #6f6f6f;
+}
+.form-floating label {
+  color: #22b455;
+}
+
+.form-select {
+  background-color: #333333;
+  border: 1px solid springgreen;
+  color: #22b455;
+  transition: background-color 0.2s ease-in-out;
+}
+.form-select:focus {
+  background-color: #6f6f6f;
 }

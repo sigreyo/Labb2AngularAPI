@@ -8,19 +8,23 @@ import { PersonComponent } from './person/person.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastsComponent } from './toasts/toasts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonComponent,
-    SearchPipe,    
+    SearchPipe,
+    ToastsComponent,    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

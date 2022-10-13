@@ -5,6 +5,9 @@ import { Person } from '../models/person.model';
 import { PersonService } from '../service/person.service';
 import { DepartmentService } from '../service/department.service';
 import { ToastsComponent } from '../toasts/toasts.component';
+import { ModalComponent } from '../modal/modal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+
 
 
 @Component({
@@ -15,10 +18,13 @@ import { ToastsComponent } from '../toasts/toasts.component';
 
 export class PersonComponent implements OnInit {
 
+  modalRef: MdbModalRef<ModalComponent> | null = null;
+
   constructor(
     private personService: PersonService,
     private depService: DepartmentService,
-    private toast: ToastsComponent) {
+    private toast: ToastsComponent,
+    private modalService: MdbModalService) {
     this.configCustomPaging = {
       id: "customPaging",
       itemsPerPage: 8,
@@ -69,7 +75,6 @@ export class PersonComponent implements OnInit {
   deletePerson(id: number) {
     this.personService.deletePerson(id).subscribe(() =>
       this.getAllPersons())
-    this.toast.showDeleteSuccess()
 
   }
 
@@ -111,4 +116,10 @@ export class PersonComponent implements OnInit {
     this.toast.showAddSuccess()
   }
 
+  openModal(id: number) {
+    this.modalRef = this.modalService.open(ModalComponent, {
+      data: { personid: id },
+      modalClass: 'modal-sm'
+    })
+  }
 }

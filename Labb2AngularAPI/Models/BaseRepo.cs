@@ -5,6 +5,12 @@ namespace Labb2AngularAPI.Models
     public class BaseRepo<T> : IBaseRepo<T> where T : class
     {
         private readonly StaffDbContext _context;
+
+        public BaseRepo(StaffDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -13,6 +19,7 @@ namespace Labb2AngularAPI.Models
 
         public async Task DeleteAsync(T entity)
         {
+            _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 

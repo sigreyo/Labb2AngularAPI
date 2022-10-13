@@ -13,95 +13,65 @@ namespace Labb2AngularAPI.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private readonly StaffDbContext _context;
+        private readonly IBaseRepo<Person> _iBaseRepo;
 
-        public PersonController(StaffDbContext context)
-        {
-            _context = context;
-        }
+        public PersonController(IBaseRepo<Person> iBaseRepo) => _iBaseRepo = iBaseRepo;
+
+
 
         // GET: api/Person
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPerson()
-        {
-            return await _context.Person.ToListAsync();
-        }
+        public async Task<ActionResult<IEnumerable<Person>>> GetAllPersons() => Ok(await _iBaseRepo.GetAllAsync());
 
         // GET: api/Person/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        public async Task<ActionResult<Person>> GetPersonById(int id)
         {
-            var person = await _context.Person.FindAsync(id);
+            var person = await _iBaseRepo.GetByIdAsync(id);
 
             if (person == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return Ok(person);
         }
 
         // PUT: api/Person/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(int id, Person person)
+        public async Task<IActionResult> UpdatePerson(Person person)
         {
-            if (id != person.Id)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(person).State = EntityState.Modified;
+            await _iBaseRepo.UpdateAsync(person);            
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PersonExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Person
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
+        public async Task<ActionResult<Person>> PostPerson([FromBody] Person person)
         {
-            _context.Person.Add(person);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPerson", new { id = person.Id }, person);
+            await _iBaseRepo.AddAsync(person);
+            return CreatedAtAction(nameof(GetPersonById), new { id = person.Id }, person);
         }
 
         // DELETE: api/Person/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePerson(int id)
         {
-            var person = await _context.Person.FindAsync(id);
+            var person = await _iBaseRepo.GetByIdAsync(id);
             if (person == null)
             {
                 return NotFound();
             }
 
-            _context.Person.Remove(person);
-            await _context.SaveChangesAsync();
+            await _iBaseRepo.DeleteAsync(person);
 
-            return NoContent();
+            return Ok();
         }
 
-        private bool PersonExists(int id)
-        {
-            return _context.Person.Any(e => e.Id == id);
-        }
+        
     }
 }

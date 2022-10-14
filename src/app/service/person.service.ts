@@ -25,5 +25,8 @@ export class PersonService {
   deletePerson(id: number): Observable<Person> {
     return this.http.delete<Person>(this.apiUrl + "/" + id)
   }
+  putPerson(person: Person): Observable<Person> {
+    return this.http.put<Person>(this.apiUrl + "/" + person.id, person)
+  }
 
 }

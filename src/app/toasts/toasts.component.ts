@@ -11,12 +11,11 @@ export class ToastsComponent {
 
   constructor(public toastService: ToastService) { }
 
-  showDeleteSuccess() {
-    this.toastService.show("Deletion succeeded!");
-  }
-
   showAddSuccess() {
     this.toastService.show("Person added!");
+  }
+  showPutSuccess() {
+    this.toastService.show("Person updated!");
   }
 
 }

@@ -1,83 +1,128 @@
-<div (click)="flash=!flash" [ngClass]="flash ? 'app-title-flash' : 'app-title'">
-    <h2>PERSONNEL DATABASE</h2>
-</div>
-<div class=" box-container">
-    <div class="open-panel left-arrows" (click)="toggleLeftPanel()">
-        <span class="symbol"><i class="fa-solid fa-plus"></i></span>
+<div class="background">
+    <div (click)="flash=!flash" [ngClass]="flash ? 'app-title-flash' : 'app-title'">
+        <h2>PERSONNEL DATABASE</h2>
     </div>
-    <div class="left-panel" *ngIf="showLeftPanel">
-        <form #form="ngForm" (ngSubmit)="submit()">
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="person.firstName" name="firstName"
-                    id="floatingFirstName">
-                <label for="floatingFirstName">First name</label>
-            </div>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="person.lastName" name="lastName"
-                    id="floatingLastName">
-                <label for="floatingLastName">Last name</label>
-            </div>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="person.address" name="address"
-                    id="floatingAddress">
-                <label for="floatingAddress">Address</label>
-            </div>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="person.salary" name="salary" id="floatingSalary">
-                <label for="floatingSalary">Salary</label>
-            </div>
-            <div class="form-floating mb-2">
-                <select class="form-select form-select-sm" [(ngModel)]="person.gender" name="gender"
-                    id="floatingGender">
-                    <option value="0">Male</option>
-                    <option value="1">Female</option>
-                </select>
-                <label for="floatingGender">Gender</label>
-            </div>
-            <div class="form-floating mb-2">
-                <select class="form-select" [(ngModel)]="person.departmentId" name="departmentId"
-                    id="floatingDepartment">
-                    <option *ngFor="let dep of departments" value="{{dep.id}}">{{dep.name}}</option>
-                </select>
-                <label for="floatingDepartment">Department</label>
-            </div>
-            <button type="submit">Save</button>
-        </form>
-    </div>
-    <div class="list-box">
-        <div class="box-header">
-            <input class="search-control" type="text" list="datalistOptions" id="exampleDataList" placeholder="SEARCH"
-                autocomplete="off" [(ngModel)]="searchText">
+    <div class=" box-container">
+        <div class="open-panel left-arrows" (click)="toggleLeftPanel()">
+            <span class="symbol"><i class="fa-solid fa-plus"></i></span>
         </div>
-        <div class="box-body">
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Salary</th>
-                        <th scope="col">Delete?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let person of persons | search: searchText | paginate: configCustomPaging">
-                        <td>{{person.firstName}} {{person.lastName}}</td>
-                        <td>{{getDepById(person.departmentId)}}</td>
-                        <td>{{person.salary}}</td>
-                        <td class="delete"><i class="fa-solid fa-person-circle-minus"
-                                (click)="openModal(person.id)"></i></td>
-                    </tr>
+        <div class="left-panel" *ngIf="showLeftPanel">
+            <form #form="ngForm" (ngSubmit)="formAddPerson()">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.firstName" name="firstName"
+                        id="floatingFirstName">
+                    <label for="floatingFirstName">First name</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.lastName" name="lastName"
+                        id="floatingLastName">
+                    <label for="floatingLastName">Last name</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.address" name="address"
+                        id="floatingAddress">
+                    <label for="floatingAddress">Address</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.salary" name="salary"
+                        id="floatingSalary">
+                    <label for="floatingSalary">Salary</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <select class="form-select form-select-sm" [(ngModel)]="person.gender" name="gender"
+                        id="floatingGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <label for="floatingGender">Gender</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <select class="form-select" [(ngModel)]="person.departmentId" name="departmentId"
+                        id="floatingDepartment">
+                        <option *ngFor="let dep of departments" value="{{dep.id}}">{{dep.name}}</option>
+                    </select>
+                    <label for="floatingDepartment">Department</label>
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+        <div class="list-box">
+            <div class="box-header">
+                <input class="search-control" type="text" list="datalistOptions" id="exampleDataList"
+                    placeholder="SEARCH" autocomplete="off" [(ngModel)]="searchText">
+            </div>
+            <div class="box-body">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Salary</th>
+                            <th scope="col">Delete?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr (click)="personToEdit(person)"
+                            *ngFor="let person of persons | search: searchText | paginate: configCustomPaging">
+                            <td>{{person.firstName}} {{person.lastName}}</td>
+                            <td>{{getDepById(person.departmentId)}}</td>
+                            <td>{{person.salary}}</td>
+                            <td class="delete"><i class="fa-solid fa-person-circle-minus"
+                                    (click)="openModal(person.id)"></i></td>
+                        </tr>
 
-                </tbody>
-            </table>
-            <div class="pagination">
-                <pagination-controls id="customPaging" [previousLabel]="configCustomPaging.previousLabel"
-                    [nextLabel]="configCustomPaging.nextLabel" (pageChange)="onPageChange($event)">
-                </pagination-controls>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <pagination-controls id="customPaging" [previousLabel]="configCustomPaging.previousLabel"
+                        [nextLabel]="configCustomPaging.nextLabel" (pageChange)="onPageChange($event)">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="open-panel right-arrows">
-        <span class="symbol"><i class="fa-solid fa-pen-to-square"></i></span>
+        <div class="right-panel" *ngIf="showRightPanel">
+            <form #form="ngForm" (ngSubmit)="formPutPerson(person)">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.firstName" name="firstName"
+                        id="floatingFirstName">
+                    <label for="floatingFirstName">First name</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.lastName" name="lastName"
+                        id="floatingLastName">
+                    <label for="floatingLastName">Last name</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.address" name="address"
+                        id="floatingAddress">
+                    <label for="floatingAddress">Address</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" [(ngModel)]="person.salary" name="salary"
+                        id="floatingSalary">
+                    <label for="floatingSalary">Salary</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <select class="form-select form-select-sm" [(ngModel)]="person.gender" name="gender"
+                        id="floatingGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <label for="floatingGender">Gender</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <select class="form-select" [(ngModel)]="person.departmentId" name="departmentId"
+                        id="floatingDepartment">
+                        <option *ngFor="let dep of departments" value="{{dep.id}}">{{dep.name}}</option>
+                    </select>
+                    <label for="floatingDepartment">Department</label>
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+        <div [ngClass]="personSelected ? 'open-panel right-arrows-selected' : 'open-panel right-arrows'"
+            (click)="toggleRightPanel()">
+            <span class="symbol"><i class="fa-solid fa-pen-to-square"></i></span>
+        </div>
     </div>
 </div>

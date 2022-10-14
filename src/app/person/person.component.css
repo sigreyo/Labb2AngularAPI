@@ -2,6 +2,7 @@
   text-align: center;
   margin-bottom: 6rem;
   color: #22b455;
+  margin-top: 40px;
 
   /* animate */
 
@@ -25,6 +26,7 @@
   }
 }
 .app-title {
+  margin-top: 40px;
   text-align: center;
   margin-bottom: 6rem;
   color: #22b455;
@@ -74,6 +76,18 @@
 .right-arrows {
   border: 3px solid springgreen;
   border-left: 0px;
+}
+.right-arrows-selected {
+  border: 3px solid springgreen;
+  border-left: 0px;
+  text-shadow: 0px 0px 0px #e1e1e1;
+
+  animation: flash 0.5s ease-in-out infinite;
+}
+@keyframes flash {
+  from {
+    text-shadow: 0px 0px 20px #e1e1e1;
+  }
 }
 .list-box {
   border: 3px solid springgreen;
@@ -135,6 +149,13 @@ th {
 }
 .left-panel button:hover {
   background-color: #6f6f6f;
+}
+.right-panel {
+  max-width: 30%;
+  padding: 10px;
+  text-align: center;
+  border: 3px solid springgreen;
+  border-left: 0px;
 }
 .form-control {
   background-color: #333333;

@@ -50,6 +50,8 @@ export class PersonComponent implements OnInit {
   configCustomPaging: any
   flash: any = true
   showLeftPanel: any = false
+  showRightPanel: any = false
+  personSelected: any = false
 
 
   ngOnInit(): void {
@@ -78,14 +80,32 @@ export class PersonComponent implements OnInit {
 
   }
 
+
   turnOffFlash() {
     this.flash = false
   }
   toggleLeftPanel() {
     this.showLeftPanel = !this.showLeftPanel
+    this.showRightPanel = false
+    this.person = {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      address: '',
+      salary: 0,
+      gender: 0,
+      departmentId: ''
+    }
+    this.personSelected = false
+
+  }
+  toggleRightPanel() {
+    this.showRightPanel = !this.showRightPanel
+    this.showLeftPanel = false
+    this.personSelected = false
   }
 
-  submit() {
+  formAddPerson() {
     this.personService.addPerson(this.person)
       .subscribe(() => {
         this.getAllPersons()
@@ -102,24 +122,46 @@ export class PersonComponent implements OnInit {
       )
     this.toast.showAddSuccess()
   }
+  formPutPerson(person: Person) {
+    this.personService.putPerson(person)
+      .subscribe(() => {
+        this.getAllPersons()
+        this.person = {
+          id: 0,
+          firstName: '',
+          lastName: '',
+          address: '',
+          salary: 0,
+          gender: 0,
+          departmentId: ''
+        }
+        this.toast.showPutSuccess()
+      })
+
+  }
 
 
   onPageChange(event: any) {
     this.configCustomPaging.currentPage = event
   }
 
-  showDeleteSuccess() {
-    this.toast.showDeleteSuccess()
-  }
 
-  showAddSuccess() {
-    this.toast.showAddSuccess()
-  }
 
   openModal(id: number) {
     this.modalRef = this.modalService.open(ModalComponent, {
       data: { personid: id },
       modalClass: 'modal-sm'
     })
+  }
+  personToEdit(person: Person) {
+    this.person = person
+    this.showLeftPanel = false
+    if (this.showRightPanel == true) {
+      this.personSelected = false
+    }
+    else {
+      this.personSelected = true
+    }
+
   }
 }

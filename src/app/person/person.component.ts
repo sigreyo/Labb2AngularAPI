@@ -135,6 +135,7 @@ export class PersonComponent implements OnInit {
           gender: 0,
           departmentId: ''
         }
+        this.showRightPanel = false
         this.toast.showPutSuccess()
       })
 

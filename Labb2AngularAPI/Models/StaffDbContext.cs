@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
-using Labb2AngularAPI.Models;
 
 namespace Labb2AngularAPI.Models
 {
@@ -11,7 +10,7 @@ namespace Labb2AngularAPI.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            var gender = new[] { "Male", "Female" };
             var personId = 1;
             var persons = new Faker<Person>("sv")
                 .RuleFor(p => p.Id, f => personId++)
@@ -19,7 +18,7 @@ namespace Labb2AngularAPI.Models
                 .RuleFor(p => p.LastName, f => f.Name.LastName())
                 .RuleFor(p => p.Address, f => f.Address.StreetAddress())
                 .RuleFor(p => p.Salary, f => f.Random.Int(32000, 59000))
-                .RuleFor(p => p.Gender, f => f.PickRandom<Gender>())
+                .RuleFor(p => p.Gender, f => f.PickRandom(gender))
                 .RuleFor(p => p.DepartmentId, f => f.Random.Int(1, 10));
 
             var depId = 1;
@@ -32,6 +31,6 @@ namespace Labb2AngularAPI.Models
 
         }
 
-        public DbSet<Labb2AngularAPI.Models.Person> Person { get; set; }
+        public DbSet<Person> Person { get; set; }
     }
 }

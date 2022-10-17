@@ -157,6 +157,18 @@ th {
   border: 3px solid springgreen;
   border-left: 0px;
 }
+.right-panel button {
+  color: #22b455;
+  padding: 3px 30px;
+  margin: 5px;
+  border-radius: 8px;
+  border: 1px solid springgreen;
+  background-color: #333333;
+  transition: background-color 0.2s ease-in-out;
+}
+.right-panel button:hover {
+  background-color: #6f6f6f;
+}
 .form-control {
   background-color: #333333;
   border: 1px solid springgreen;

@@ -3,9 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Labb2AngularAPI.Models
 {
-    public class StaffDbContext:DbContext
+    public class StaffDbContext : DbContext
     {
-        public StaffDbContext(DbContextOptions opt) : base(opt){ }
+        public StaffDbContext(DbContextOptions opt) : base(opt) { }
+        public DbSet<Person> Person { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +32,5 @@ namespace Labb2AngularAPI.Models
 
         }
 
-        public DbSet<Person> Person { get; set; }
     }
 }

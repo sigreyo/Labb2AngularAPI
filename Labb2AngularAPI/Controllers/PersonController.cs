@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Labb2AngularAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Labb2AngularAPI.Models;
 
 namespace Labb2AngularAPI.Controllers
 {
@@ -43,7 +37,7 @@ namespace Labb2AngularAPI.Controllers
         public async Task<IActionResult> UpdatePerson(Person person)
         {
 
-            await _iBaseRepo.UpdateAsync(person);            
+            await _iBaseRepo.UpdateAsync(person);
 
             return Ok();
         }
@@ -72,6 +66,6 @@ namespace Labb2AngularAPI.Controllers
             return Ok();
         }
 
-        
+
     }
 }
